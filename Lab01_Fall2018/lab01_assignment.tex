@@ -1,0 +1,120 @@
+\documentclass[12pt,a4paper]{article}
+
+%\input{../../../../../tex/temptale/ta_assignment}
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.8}
+
+
+\lstset{ %
+  backgroundcolor=\color{light-gray},
+  escapeinside={(*@}{@*)},    
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  }
+
+\begin{document}
+
+%\providecommand{\coursename}{CS 166}
+%\providecommand{\assignmentName}{Lab5 Assignment: Structured Query Language - SQL}
+\title{CS 166: Lab01 Assignment}
+\maketitle
+
+This is an introductory lab to help you familiarize yourself with the tools that will be used throughout the course.
+
+\section{Initialize PSQL Environment}
+
+Following, we describe the steps associated with initializing our execution environment.
+
+\begin{enumerate}
+	\item Execute the following command to initialize the PSQL environment
+		\begin{lstlisting}
+source ./startPostgreSQL.sh
+		\end{lstlisting}
+	\textbf{Note:}	Examine the script you just executed. Look at every command and try to figure out its functionality. Pay special attention to the $PGPORT$ variable. After executing the above script type \textit{pg\_ctl status} to view the status of the server, it should indicate that it is running correctly.
+		
+	\item Execute the following command to create your database
+		\begin{lstlisting}
+source ./createPostgreDB.sh
+		\end{lstlisting}
+\textbf{Note:}	Examine the script you just executed. Look at every command and try to figure out its functionality. What is the name of the database you just created?
+	
+	\item Once you finished with the whole assignment, \textbf{DO NOT FORGET!} to call the following command to stop the server and shutdown the database.
+			\begin{lstlisting}
+source ./stopPostgreDB.sh
+		\end{lstlisting}
+	\textbf{Note:}	Examine the script you just executed. Look at every command and try to figure out its functionality.
+		
+\end{enumerate}
+
+\section{Execute SQL Statements}
+
+After initializing your environment you should execute a series of SQL statements. \textbf{DO NOT OPEN!} a new terminal window, the scripts you just executed rely on system variables initialized through the previous scripts. Opening a new window will require initializing the values from scratch, hence running each script again after stopping the database correctly.
+
+First, you will use the interactive environment PSQL environment to execute some SQL statements.
+
+\begin{enumerate}
+	\item  Type the following command to launch the PSQL interactive environment
+	\begin{lstlisting}
+psql -h localhost -p $PGPORT $USER"_DB"
+	\end{lstlisting}
+	We use \$ to specify the value of the system variable with the corresponding name. In this case, \$USER is your username. Alternatively, you can type the values directly if you know them. For example, if your username is \textit{vzois001} and the port number is set to 8192 then the command should look like:
+	\begin{lstlisting}
+psql -h localhost -p 8192 "vzois001_DB"
+	\end{lstlisting}
+	
+	\item In the terminal type the following statement to create a table with name students
+	\begin{lstlisting}
+CREATE TABLE Students (SID numeric (9, 0), Name text, Grade float);
+	\end{lstlisting}
+
+	\item Type \textbackslash dt to view a list of all tables in the database. You should be able to see the table you just created.
+	
+	\item Insert a single row in the table using the following statement
+		\begin{lstlisting}
+INSERT INTO Students VALUES (860507041, 'John Anderson', 3.67);
+	\end{lstlisting}
+This statement will create a record in the table Students for a new student with name John Anderson, SID 860507041 and GPA 3.67.
+	
+	\item Insert a single row in the table using the following statement
+		\begin{lstlisting}
+INSERT INTO Students VALUES (860309067, 'Tom Kamber', 3.12);
+	\end{lstlisting}
+This statement will create a record in the table Students for a new student with name Tom Kamber, SID 860309041 and GPA 3.12.
+
+	\item Execute a query using the following command
+	\begin{lstlisting}
+SELECT SID, Name, Grade FROM Students WHERE SID = 860507041;
+	\end{lstlisting}
+This statement will retrieve all records from the table Students which satisfy the condition that the column SID has value 860507041.
+	
+	\item Try to insert a new student in the table with name George Haggerty SID = 860704039 and GPA = 3.67.
+	
+	\item Try to retrieve all records from the table which have GPA = 3.67.
+
+	\item Exit from the PSQL terminal (type \textbackslash q).
+	
+	\item Using the text editor (gedit), create a .sql file containing all of the previous statements (except \textbackslash dt). At the top of the file include the following statement
+		\begin{lstlisting}
+DROP TABLE IF EXISTS Students;
+	\end{lstlisting}
+	
+	This statement is often used at the beginning of each script to avoid errors when re-initializing the tables.
+	
+	\item Use the following command to execute all statements in the .sql file you just created
+	\begin{lstlisting}
+psql -h localhost -p $PGPORT $USER_"DB" < script.sql
+	\end{lstlisting}
+	
+	Replace "script" with the name of your script.
+	
+	\item Shutdown the database using the appropriate script (look at previous section).
+	
+	\item Submit the script you created in iLearn.
+	
+\end{enumerate}
+
+
+
+\end{document}
