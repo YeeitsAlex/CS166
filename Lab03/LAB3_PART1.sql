@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS Professor
-DROP TABLE IF EXISTS Project
-DROP TABLE IF EXISTS Works_In
-DROP TABLE IF EXISTS Dept
-DROP TABLE IF EXISTS Work_Dept
-DROP TABLE IF EXISTS Graduate
-DROP TABLE IF EXISTS Work_Proj
+DROP TABLE IF EXISTS Professor cascade;
+DROP TABLE IF EXISTS Project cascade;
+DROP TABLE IF EXISTS Works_In;
+DROP TABLE IF EXISTS Dept cascade;
+DROP TABLE IF EXISTS Work_Dept;
+DROP TABLE IF EXISTS Graduate cascade;
+DROP TABLE IF EXISTS Work_Proj;
 
 CREATE TABLE Professor	(ssn CHAR(11) NOT NULL,
 			name CHAR(30) NOT NULL,
@@ -46,6 +46,7 @@ CREATE TABLE Graduate	(ssn CHAR(11) NOT NULL,
 			name CHAR(30) NOT NULL,
 			age Integer NOT NULL,
 			deg_pg CHAR(30) NOT NULL,
+			dno Integer,
 			PRIMARY KEY(ssn),
 			FOREIGN KEY(dno) REFERENCES Dept(dno)  );
 
@@ -53,7 +54,7 @@ CREATE TABLE Work_Proj	(pno Integer NOT NULL,
 			grad_ssn CHAR(11) NOT NULL,
 			prof_ssn CHAR(11) NOT NULL,
 			since DATE NOT NULL,
-			PRIMARY KEY(pno,grad_ssn),
+			PRIMARY KEY(pno,grad_ssn, prof_ssn),
 			FOREIGN KEY(pno) REFERENCES Project(pno) ,
 			FOREIGN KEY(grad_ssn) REFERENCES Graduate(ssn) ,
 			FOREIGN KEY(prof_ssn) REFERENCES Professor(ssn)  );
