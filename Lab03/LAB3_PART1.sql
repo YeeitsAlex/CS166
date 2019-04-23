@@ -1,0 +1,60 @@
+DROP TABLE IF EXISTS Professor
+DROP TABLE IF EXISTS Project
+DROP TABLE IF EXISTS Works_In
+DROP TABLE IF EXISTS Dept
+DROP TABLE IF EXISTS Work_Dept
+DROP TABLE IF EXISTS Graduate
+DROP TABLE IF EXISTS Work_Proj
+
+CREATE TABLE Professor	(ssn CHAR(11) NOT NULL,
+			name CHAR(30) NOT NULL,
+			age INTEGER NOT NULL,
+			p_rank INTEGER NOT NULL,
+			specialty CHAR(100) NOT NULL,
+			PRIMARY KEY(ssn));
+
+CREATE TABLE Project	(pno INTEGER NOT NULL,
+			ssn CHAR(30) NOT NULL,
+ 		 	sponsor CHAR(30) NOT NULL,
+			start_date DATE NOT NULL,
+			end_date DATE NOT NULL,
+			budget REAL NOT NULL,
+			PRIMARY KEY(pno),
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn));
+
+CREATE TABLE Works_In	(ssn CHAR(11) NOT NULL,
+			pno INTEGER,
+			PRIMARY KEY(ssn,pno),
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn) ON DELETE NO ACTION,
+			FOREIGN KEY(pno) REFERENCES Project(pno) ON DELETE NO ACTION );
+
+CREATE TABLE Dept	(dno INTEGER NOT NULL,
+			ssn CHAR(30) NOT NULL,
+			dname CHAR(30) NOT NULL,
+			office CHAR(30) NOT NULL,
+			PRIMARY KEY(dno),
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn) ON DELETE NO ACTION);
+
+CREATE TABLE Work_Dept	(ssn CHAR(11) NOT NULL,
+			dno INTEGER,
+			PRIMARY KEY(ssn, dno),
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn) ON DELETE NO ACTION,
+			FOREIGN KEY(dno) REFERENCES DEPT(dno) ON DELETE NO ACTION );
+
+CREATE TABLE Graduate	(ssn CHAR(11) NOT NULL,
+			advisor_ssn CHAR(11) NOT NULL,
+			name CHAR(30) NOT NULL,
+			age INTEGER NOT NULL,
+			deg_pg CHAR(30) NOT NULL,
+			PRIMARY KEY(ssn),
+			FOREIGN KEY(advisor_ssn) REFERENCES Graduate(ssn) ON DELETE NO ACTION,
+			FOREIGN KEY(dno) REFERENCES Dept(dno) ON DELETE NO ACTION );
+
+CREATE TABLE Work_Proj	(pno INTEGER NOT NULL,
+			grad_ssn CHAR(11) NOT NULL,
+			prof_ssn CHAR(11) NOT NULL,
+			since DATE NOT NULL,
+			PRIMARY KEY(pno,grad_ssn),
+			FOREIGN KEY(pno) REFERENCES Project(pno) ON DELETE NO ACTION,
+			FOREIGN KEY(grad_ssn) REFERENCES Graduate(ssn) ON DELETE NO ACTION,
+			FOREIGN KEY(prof_ssn) REFERENCES Professor(ssn) ON DELETE NO ACTION );
