@@ -253,7 +253,7 @@ public class EmbeddedSQL {
       try{
          String query1 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C GROUP BY S.sname";
          int total = esql.executeQuery(query1);
-         System.out.println ("total: " + total);
+         //System.out.println ("total: " + total);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
@@ -267,7 +267,7 @@ public class EmbeddedSQL {
       try{
          String query2 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C GROUP BY S.sname HAVING COUNT(*) > 2";
          int s_total = esql.executeQuery(query2);
-         System.out.println ("Suppliers that sell more than 3 parts: " + s_total);
+         //System.out.println ("Suppliers that sell more than 3 parts: " + s_total);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
@@ -281,7 +281,7 @@ public class EmbeddedSQL {
       try{
          String query3 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C NATURAL JOIN Parts P WHERE S.sid NOT IN(SELECT C2.sid From Catalog C2 NATURAL JOIN Parts P2 WHERE P2.color <> 'Green') GROUP BY S.sname";
          int total3 = esql.executeQuery(query3);
-         System.out.println ("Supplier and their total parts: " + total3);
+         //System.out.println ("Supplier and their total parts: " + total3);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
@@ -295,7 +295,7 @@ public class EmbeddedSQL {
       try{
          String query4 = "SELECT S.sname, MAX(c.cost) FROM Suppliers S NATURAL JOIN Catalog C NATURAL JOIN Parts P WHERE S.sid IN (SELECT S2.sid FROM Suppliers S2 NATURAL JOIN Catalog C2 NATURAL JOIN Parts P2 WHERE P2.color = 'Red' INTERSECT SELECT S3.sid FROM Suppliers S3 NATURAL JOIN Catalog C3 NATURAL JOIN Parts P3 WHERE P3.color = 'Green') GROUP BY S.sname";
          int total4 = esql.executeQuery(query4);
-         System.out.println ("Suppliers that sell red and green parts and their most expensive part: " + total4);
+         //System.out.println ("Suppliers that sell red and green parts and their most expensive part: " + total4);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
