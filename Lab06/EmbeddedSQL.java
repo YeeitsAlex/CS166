@@ -309,7 +309,7 @@ public class EmbeddedSQL {
       try{
          System.out.print("\tEnter cost: $");
          String input = in.readLine();
-         String query5 = "SELECT P.pname FROM Parts P NATURAL JOIN Catalog C WHERE C.cost < ''" + input + "''";
+         String query5 = "SELECT P.pname FROM Parts P NATURAL JOIN Catalog C WHERE C.cost < '" + input + "'";
 
 
          int names = esql.executeQuery(query5);
@@ -326,7 +326,7 @@ public class EmbeddedSQL {
       try{
          System.out.print("\tPart: $");
          String input = in.readLine();
-         String query6 = "SELECT address FROM PARTS P NATURAL JOIN CATALOG C NATURAL JOIN SUPPLIERS S WHERE P.name = '" + input "''";
+         String query6 = "SELECT address FROM PARTS P NATURAL JOIN CATALOG C NATURAL JOIN SUPPLIERS S WHERE P.name = '" + input + "'";
 
 
          int names = esql.executeQuery(query6);
