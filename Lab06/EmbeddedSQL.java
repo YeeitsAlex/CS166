@@ -284,7 +284,7 @@ public class EmbeddedSQL {
 			WHERE P2.color <> 'Green')
          GROUP BY S.sname;";
          int total3 = esql.executeQuery(query3);
-         System.out.println ("Supplier and their total parts: " + total);
+         System.out.println ("Supplier and their total parts: " + total3);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
