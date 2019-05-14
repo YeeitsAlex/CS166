@@ -252,6 +252,8 @@ public class EmbeddedSQL {
       // Your code goes here.
       try{
          String query1 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C GROUP BY S.sname";
+         int total = esql.executeQuery(query1);
+         System.out.println ("total: " + total);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
