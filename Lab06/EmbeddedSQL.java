@@ -292,6 +292,14 @@ public class EmbeddedSQL {
 
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
+      try{
+         String query4 = "SELECT S.sname, MAX(c.cost) FROM Suppliers S NATURAL JOIN Catalog C NATURAL JOIN Parts P WHERE S.sid IN (SELECT S2.sid FROM Suppliers S2 NATURAL JOIN Catalog C2 NATURAL JOIN Parts P2 WHERE P2.color = 'Red' INTERSECT SELECT S3.sid FROM Suppliers S3 NATURAL JOIN Catalog C3 NATURAL JOIN Parts P3 WHERE P3.color = 'Green') GROUP BY S.sname";
+         int total4 = esql.executeQuery(query4);
+         System.out.println ("Suppliers that sell red and green parts and their most expensive part: " + total4);
+      }
+      catch(Exception e){
+         System.err.println (e.getMessage());
+      }
       // ...
       // ...
    }//end Query4
