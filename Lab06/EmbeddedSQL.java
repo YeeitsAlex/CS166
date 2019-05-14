@@ -281,7 +281,7 @@ public class EmbeddedSQL {
       try{
          String query3 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C NATURAL JOIN Parts P WHERE S.sid NOT IN(SELECT C2.sid From Catalog C2 NATURAL JOIN Parts P2 WHERE P2.color <> 'Green') GROUP BY S.sname";
          int total3 = esql.executeQuery(query3);
-         //System.out.println ("Supplier and their total parts: " + total3);
+         System.out.println ("Supplier and their total parts: " + total3);
       }
       catch(Exception e){
          System.err.println (e.getMessage());
@@ -306,12 +306,36 @@ public class EmbeddedSQL {
 
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
+      try{
+         String query5 = "SELECT P.pname FROM Parts P NATURAL JOIN Catalog C WHERE C.cost < ''";
+         System.out.print("\tEnter cost: $");
+         String input = in.readLine();
+         query += input;
+         query += "''"
+
+         int names = esql.executeQuery(query5);
+         System.out.println ("Names: " + names);
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
       // ...
       // ...
    }//end Query5
 
    public static void Query6(EmbeddedSQL esql){
       // Your code goes here.
+      try{
+         String query5 = "SELECT address FROM PARTS P NATURAL JOIN CATALOG C NATURAL JOIN SUPPLIERS S WHERE P.name = '";
+         System.out.print("\tEnter cost: $");
+         String input = in.readLine();
+         query += input;
+         query += "''"
+
+         int names = esql.executeQuery(query5);
+         System.out.println ("Addresses: " + names);
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
       // ...
       // ...
    }//end Query6
