@@ -253,6 +253,9 @@ public class EmbeddedSQL {
       try{
          String query1 = "SELECT S.sname, COUNT(*) FROM Suppliers S NATURAL JOIN Catalog C GROUP BY S.sname";
       }
+      catch(Exception e){
+         System.err.println (e.getMessage());
+      }
       // ...
       // ...
    }//end Query1
