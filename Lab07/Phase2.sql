@@ -58,7 +58,7 @@ CREATE TABLE Flight (flight_num Integer NOT NULL,
                     FOREIGN KEY(plane_ID) REFERENCES Plane(plane_ID));
 
 --Assuming that day = a date and not something like "Monday"
-CREATE TABLE Schedule (flight_num text,
+CREATE TABLE Schedule (flight_num Integer,
                       depart_time time,
                       arrive_time time,
                       source text,
