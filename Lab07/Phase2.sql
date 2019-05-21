@@ -26,7 +26,6 @@ CREATE TABLE Technician (tech_ID text,
 CREATE TABLE Pilot (pilot_ID text,
                     name text,
                     nationality text,
-                    repair_requestID text,
                     PRIMARY KEY(pilot_ID));
 
 CREATE TABLE Repairs (repair_date date,
@@ -37,7 +36,6 @@ CREATE TABLE Repairs (repair_date date,
                       repair_requestID text,
                       PRIMARY KEY(plane_ID, tech_ID, pilot_ID, repair_requestID),
                       FOREIGN KEY (plane_ID) REFERENCES Plane(plane_ID),
-                      FOREIGN KEY (repair_requestID) REFERENCES Pilot(repair_requestID),
                       FOREIGN KEY (pilot_ID) REFERENCES Pilot(pilot_ID),
                       FOREIGN KEY (tech_ID) REFERENCES Technician(tech_ID));
 
