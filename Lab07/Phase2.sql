@@ -80,8 +80,7 @@ CREATE TABLE Customer (first_name text NOT NULL,
                       contact_num text NOT NULL,
                       cust_ID text NOT NULL,
                       ZIP_code Integer NOT NULL,
-                      PRIMARY KEY(cust_ID),
-                      FOREIGN KEY(flight_num) REFERENCES Flight(flight_num));
+                      PRIMARY KEY(cust_ID));
 
 CREATE TABLE Reservation (Rnum text NOT NULL,
                          PRIMARY KEY(Rnum));
