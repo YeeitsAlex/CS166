@@ -12,28 +12,28 @@ DROP TABLE IF EXISTS Reserved cascade;
 DROP TABLE IF EXISTS Has cascade;
 
 --ASSUMPTION THAT ID is different in each entity
-CREATE TABLE Plane (plane_ID text,
-                    make date,
-                    model text,
-                    age Integer,
-                    num_seats Integer,
+CREATE TABLE Plane (plane_ID text NOT NULL,
+                    make date NOT NULL,
+                    model text NOT NULL,
+                    age Integer NOT NULL,
+                    num_seats Integer NOT NULL,
                     PRIMARY KEY(plane_ID));
 
-CREATE TABLE Technician (tech_ID text,
+CREATE TABLE Technician (tech_ID text NOT NULL,
                         PRIMARY KEY(tech_ID));
 
 --Uses and repair request both use plane_ID
-CREATE TABLE Pilot (pilot_ID text,
-                    name text,
-                    nationality text,
+CREATE TABLE Pilot (pilot_ID text NOT NULL,
+                    name text NOT NULL,
+                    nationality text NOT NULL,
                     PRIMARY KEY(pilot_ID));
 
-CREATE TABLE Repairs (repair_date date,
-                      repair_code text,
-                      tech_ID text,
-                      pilot_ID text,
-                      plane_ID text,
-                      repair_requestID text,
+CREATE TABLE Repairs (repair_date date NOT NULL,
+                      repair_code text NOT NULL,
+                      tech_ID text NOT NULL,
+                      pilot_ID text NOT NULL,
+                      plane_ID text NOT NULL,
+                      repair_requestID text NOT NULL,
                       PRIMARY KEY(plane_ID, tech_ID, pilot_ID, repair_requestID),
                       FOREIGN KEY (plane_ID) REFERENCES Plane(plane_ID),
                       FOREIGN KEY (pilot_ID) REFERENCES Pilot(pilot_ID),
@@ -45,14 +45,14 @@ CREATE TABLE Repairs (repair_date date,
 --Plane can be used by one or more flights
 
 CREATE TABLE Flight (flight_num Integer NOT NULL,
-                    plane_ID text,
-                    cost text,
-                    num_sold Integer,
-                    num_stops Integer,
-                    actual_arrive_date date,
-                    actual_arrival_time time,
-                    actual_depart_time time,
-                    actual_depart_date date,
+                    plane_ID text NOT NULL,
+                    cost text NOT NULL,
+                    num_sold Integer NOT NULL,
+                    num_stops Integer NOT NULL,
+                    actual_arrive_date date NOT NULL,
+                    actual_arrival_time time NOT NULL,
+                    actual_depart_time time NOT NULL,
+                    actual_depart_date date NOT NULL,
                     source text NOT NULL,
                     destination text NOT NULL,
                     PRIMARY KEY(flight_num, source, destination),
@@ -60,49 +60,49 @@ CREATE TABLE Flight (flight_num Integer NOT NULL,
 
 --Assuming that day = a date and not something like "Monday"
 CREATE TABLE Schedule (flight_num Integer NOT NULL,
-                      depart_time time,
-                      arrive_time time,
+                      depart_time time NOT NULL,
+                      arrive_time time NOT NULL,
                       source text NOT NULL,
                       destination text NOT NULL,
-                      day date,
+                      day date NOT NULL,
                       PRIMARY KEY(flight_num, source, destination),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num),
                       FOREIGN KEY(source) REFERENCES Flight(source),
                       FOREIGN KEY(destination) REFERENCES Flight(destination));
 
 
-CREATE TABLE Customer (first_name text,
-                      last_name text,
-                      flight_num Integer,
-                      gender text,
-                      date_of_birth date,
-                      address text,
-                      contact_num text,
+CREATE TABLE Customer (first_name text NOT NULL,
+                      last_name text NOT NULL,
+                      flight_num Integer NOT NULL,
+                      gender text NOT NULL,
+                      date_of_birth date NOT NULL,
+                      address text NOT NULL,
+                      contact_num text NOT NULL,
                       cust_ID text NOT NULL,
-                      ZIP_code Integer,
+                      ZIP_code Integer NOT NULL,
                       PRIMARY KEY(cust_ID),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num));
 
-CREATE TABLE Reservation (Rnum text,
+CREATE TABLE Reservation (Rnum text NOT NULL,
                          PRIMARY KEY(Rnum));
 
-CREATE TABLE Waitlisted (Rnum text,
+CREATE TABLE Waitlisted (Rnum text NOT NULL,
                         PRIMARY KEY(Rnum)
                         FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
-CREATE TABLE Confirmed (Rnum text,
+CREATE TABLE Confirmed (Rnum text NOT NULL,
                         PRIMARY KEY(Rnum),
                         FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
-CREATE TABLE Reserved (Rnum text,
+CREATE TABLE Reserved (Rnum text NOT NULL,
                       PRIMARY KEY(Rnum)
                       FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
 CREATE TABLE Has (flight_num Integer NOT NULL,
-                  cust_ID text,
-                  source text,
-                  destination text,
-                  Rnum text,
+                  cust_ID text NOT NULL,
+                  source text NOT NULL,
+                  destination text NOT NULL,
+                  Rnum text NOT NULL,
                   PRIMARY KEY(flight_num,cust_ID,source,destination),
                   FOREIGN KEY(cust_ID) REFERENCES Customer(cust_ID),
                   FOREIGN KEY(flight_num) REFERENCES Flight(flight_num),
