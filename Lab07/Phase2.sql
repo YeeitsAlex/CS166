@@ -104,8 +104,6 @@ CREATE TABLE Has (flight_num Integer NOT NULL,
                   destination text NOT NULL,
                   Rnum text NOT NULL,
                   PRIMARY KEY(flight_num,cust_ID,source,destination, Rnum),
-                  FOREIGN KEY(flight_num) REFERENCES Flight(flight_num),
+                  FOREIGN KEY(flight_num, source, destination) REFERENCES Flight(flight_num, source, destination)
                   FOREIGN KEY(cust_ID) REFERENCES Customer(cust_ID),
-                  FOREIGN KEY(source) REFERENCES Flight(source),
-                  FOREIGN KEY(destination) REFERENCES Flight(destination),
                   FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
