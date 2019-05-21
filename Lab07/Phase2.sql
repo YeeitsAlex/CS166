@@ -86,7 +86,7 @@ CREATE TABLE Reservation (Rnum text NOT NULL,
                          PRIMARY KEY(Rnum));
 
 CREATE TABLE Waitlisted (Rnum text NOT NULL,
-                        PRIMARY KEY(Rnum)
+                        PRIMARY KEY(Rnum),
                         FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
 CREATE TABLE Confirmed (Rnum text NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE Confirmed (Rnum text NOT NULL,
                        FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
 CREATE TABLE Reserved (Rnum text NOT NULL,
-                      PRIMARY KEY(Rnum)
+                      PRIMARY KEY(Rnum),
                       FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
 CREATE TABLE Has (flight_num Integer NOT NULL,
