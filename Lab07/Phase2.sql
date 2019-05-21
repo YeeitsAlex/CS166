@@ -78,7 +78,7 @@ CREATE TABLE Customer (first_name text,
                       date_of_birth date,
                       address text,
                       contact_num text,
-                      cust_ID text NOT NULL,
+                      cust_ID text,
                       ZIP_code Integer,
                       PRIMARY KEY(cust_ID),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num));
