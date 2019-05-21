@@ -44,7 +44,7 @@ CREATE TABLE Repairs (repair_date date,
 --REF plane_ID for uses relation, every Flight must use 1 plane
 --Plane can be used by one or more flights
 
-CREATE TABLE Flight (flight_num Integer NOT NULL,
+CREATE TABLE Flight (flight_num Integer,
                     plane_ID text,
                     cost text,
                     num_sold Integer,
