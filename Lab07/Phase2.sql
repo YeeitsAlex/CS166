@@ -1,22 +1,22 @@
-DROP TABLE IF EXISTS Customer;
-DROP TABLE IF EXISTS Plane;
-DROP TABLE IF EXISTS Technician;
-DROP TABLE IF EXISTS Repairs;
-DROP TABLE IF EXISTS Pilot;
-DROP TABLE IF EXISTS Flight;
-DROP TABLE IF EXISTS Schedule;
-DROP TABLE IF EXISTS Reservation;
-DROP TABLE IF EXISTS Waitlisted;
-DROP TABLE IF EXISTS Confirmed;
-DROP TABLE IF EXISTS Reserved;
-DROP TABLE IF EXISTS Has;
+DROP TABLE IF EXISTS Customer cascade;
+DROP TABLE IF EXISTS Plane cascade;
+DROP TABLE IF EXISTS Technician cascade;
+DROP TABLE IF EXISTS Repairs cascade;
+DROP TABLE IF EXISTS Pilot cascade;
+DROP TABLE IF EXISTS Flight cascade;
+DROP TABLE IF EXISTS Schedule cascade;
+DROP TABLE IF EXISTS Reservation cascade;
+DROP TABLE IF EXISTS Waitlisted cascade;
+DROP TABLE IF EXISTS Confirmed cascade;
+DROP TABLE IF EXISTS Reserved cascade;
+DROP TABLE IF EXISTS Has cascade;
 
 --ASSUMPTION THAT ID is different in each entity
 CREATE TABLE Plane (plane_ID text,
                     make date,
                     model text,
                     age integer,
-                    num_seats integer
+                    num_seats integer,
                     PRIMARY KEY(plane_ID));
 
 CREATE TABLE Technician (tech_ID text,
@@ -30,7 +30,7 @@ CREATE TABLE Pilot (pilot_ID text,
                     PRIMARY KEY(pilot_ID));
 
 CREATE TABLE Repairs (repair_date date,
-                      repair_code text,)
+                      repair_code text,
                       tech_ID text,
                       pilot_ID text,
                       plane_ID text,
