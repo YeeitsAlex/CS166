@@ -46,6 +46,7 @@ CREATE TABLE Repairs (repair_date date NOT NULL,
 
 CREATE TABLE Flight (flight_num Integer NOT NULL,
                     plane_ID text NOT NULL,
+                    pilot_ID text NOT NULL,
                     cost text NOT NULL,
                     num_sold Integer NOT NULL,
                     num_stops Integer NOT NULL,
@@ -56,7 +57,8 @@ CREATE TABLE Flight (flight_num Integer NOT NULL,
                     source text NOT NULL,
                     destination text NOT NULL,
                     PRIMARY KEY(flight_num, source, destination),
-                    FOREIGN KEY(plane_ID) REFERENCES Plane(plane_ID));
+                    FOREIGN KEY(plane_ID) REFERENCES Plane(plane_ID),
+                    FOREIGN KEY(pilot_ID) REFERENCES Pilot(pilot_ID));
 
 --Assuming that day = a date and not something like "Monday"
 CREATE TABLE Schedule (flight_num Integer NOT NULL,
