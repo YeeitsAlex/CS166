@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS Has cascade;
 CREATE TABLE Plane (plane_ID text,
                     make date,
                     model text,
-                    age integer,
-                    num_seats integer,
+                    age Integer,
+                    num_seats Integer,
                     PRIMARY KEY(plane_ID));
 
 CREATE TABLE Technician (tech_ID text,
@@ -46,11 +46,11 @@ CREATE TABLE Repairs (repair_date date,
 --REF plane_ID for uses relation, every Flight must use 1 plane
 --Plane can be used by one or more flights
 
-CREATE TABLE Flight (flight_num integer NOT NULL,
+CREATE TABLE Flight (flight_num Integer NOT NULL,
                     plane_ID text,
                     cost text,
-                    num_sold integer,
-                    num_stops integer,
+                    num_sold Integer,
+                    num_stops Integer,
                     actual_arrive_date date,
                     actual_arrival_time time,
                     actual_depart_date date,
@@ -72,13 +72,13 @@ CREATE TABLE Schedule (flight_num text,
 
 CREATE TABLE Customer (first_name text,
                       last_name text,
-                      flight_num integer,
+                      flight_num Integer,
                       gender text,
                       date_of_birth date,
                       address text,
                       contact_num text,
                       cust_ID text NOT NULL,
-                      ZIP_code integer,
+                      ZIP_code Integer,
                       PRIMARY KEY(cust_ID),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num));
 
@@ -97,7 +97,7 @@ CREATE TABLE Reserved (Rnum text,
                       PRIMARY KEY(Rnum)
                       FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
-CREATE TABLE Has (flight_num integer,
+CREATE TABLE Has (flight_num Integer,
                   cust_ID text,
                   source text,
                   destination text,
