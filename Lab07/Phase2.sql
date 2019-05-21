@@ -63,6 +63,8 @@ CREATE TABLE Flight (flight_num Integer NOT NULL,
 CREATE TABLE Schedule (flight_num text,
                       depart_time time,
                       arrive_time time,
+                      source text,
+                      destination text,
                       day date,
                       PRIMARY KEY(flight_num, source, destination),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num)
