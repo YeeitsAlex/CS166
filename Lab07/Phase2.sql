@@ -44,7 +44,7 @@ CREATE TABLE Repairs (repair_date date,
 --REF plane_ID for uses relation, every Flight must use 1 plane
 --Plane can be used by one or more flights
 
-CREATE TABLE Flight (flight_num Integer,
+CREATE TABLE Flight (flight_num Integer NOT NULL,
                     plane_ID text,
                     cost text,
                     num_sold Integer,
@@ -53,17 +53,17 @@ CREATE TABLE Flight (flight_num Integer,
                     actual_arrival_time time,
                     actual_depart_time time,
                     actual_depart_date date,
-                    source text,
-                    destination text,
+                    source text NOT NULL,
+                    destination text NOT NULL,
                     PRIMARY KEY(flight_num, source, destination),
                     FOREIGN KEY(plane_ID) REFERENCES Plane(plane_ID));
 
 --Assuming that day = a date and not something like "Monday"
-CREATE TABLE Schedule (flight_num Integer,
+CREATE TABLE Schedule (flight_num Integer NOT NULL,
                       depart_time time,
                       arrive_time time,
-                      source text,
-                      destination text,
+                      source text NOT NULL,
+                      destination text NOT NULL,
                       day date,
                       PRIMARY KEY(flight_num, source, destination),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num),
@@ -78,7 +78,7 @@ CREATE TABLE Customer (first_name text,
                       date_of_birth date,
                       address text,
                       contact_num text,
-                      cust_ID text,
+                      cust_ID text NOT NULL,
                       ZIP_code Integer,
                       PRIMARY KEY(cust_ID),
                       FOREIGN KEY(flight_num) REFERENCES Flight(flight_num));
@@ -98,7 +98,7 @@ CREATE TABLE Reserved (Rnum text,
                       PRIMARY KEY(Rnum)
                       FOREIGN KEY(Rnum) REFERENCES Reservation(Rnum));
 
-CREATE TABLE Has (flight_num Integer,
+CREATE TABLE Has (flight_num Integer NOT NULL,
                   cust_ID text,
                   source text,
                   destination text,
