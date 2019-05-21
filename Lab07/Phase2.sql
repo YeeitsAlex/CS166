@@ -68,9 +68,7 @@ CREATE TABLE Schedule (flight_num Integer NOT NULL,
                       destination text NOT NULL,
                       day date NOT NULL,
                       PRIMARY KEY(flight_num, source, destination),
-                      FOREIGN KEY(flight_num) REFERENCES Flight(flight_num),
-                      FOREIGN KEY(source) REFERENCES Flight(source),
-                      FOREIGN KEY(destination) REFERENCES Flight(destination));
+                      FOREIGN KEY(flight_num, source, destination) REFERENCES Flight(flight_num, source, destination));
 
 
 CREATE TABLE Customer (first_name text NOT NULL,
